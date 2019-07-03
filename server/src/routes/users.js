@@ -11,12 +11,8 @@ const validation = [
   ValidationHandler.isEmptyReq
 ];
 
-userRoutes.post(
-  "/signup",
-  UserValidation.signup,
-  validation,
-  UserController.signup
-);
+userRoutes.post("/signup", UserValidation.signup, validation, UserController.signup);
 
+userRoutes.post("/login", UserValidation.login, validation, UserController.login);
 
 export default userRoutes;
