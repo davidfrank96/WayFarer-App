@@ -4,8 +4,8 @@ import logger from "morgan";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
 import "babel-polyfill";
+import ErrorHandler from "./middlewares/ErrorHandler";
 import apiRoutes from "./routes";
-//import ErrorHandler from "./middlewares/ErrorHandler";
 
 config();
 
@@ -28,7 +28,10 @@ app.use("*", (req, res) =>
     })
 );
 
-//app.use(ErrorHandler.sendError);
+
+
+
+app.use(ErrorHandler.sendError);
 
 app.listen(port, () => {
     console.log(`Listening from port ${port}`);

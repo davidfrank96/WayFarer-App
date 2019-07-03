@@ -1,5 +1,15 @@
 import express from "express";
-//import userRoutes from "./users";
+import userRoutes from "./users";
+import UserValidation from "../validations/UserValidation";
+import Authorization from "../middlewares/Authorization";
+import Trim from "../middlewares/Trim";
+import ValidationHandler from "../middlewares/ValidationHandler";
+
+const validation = [
+  ValidationHandler.validate,
+  Trim.trim,
+  ValidationHandler.isEmptyReq
+];
 
 const apiRoutes = express.Router();
 
@@ -17,6 +27,13 @@ apiRoutes.get("/v1", (req, res) =>
   })
 );
 
-//apiRoutes.use("/v1/auth", userRoutes);
+apiRoutes.use("/v1/auth", userRoutes);
+apiRoutes.use(
+  "/v1/admin",
+  Authorization.authenticate,
+  Authorization.isAdmin,
+  UserValidation.signup,
+  validation,
+);
 
 export default apiRoutes;
