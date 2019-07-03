@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import { config } from 'dotenv';
-//import configAll from '../../config/database_config';
+import configAll from '../../config/database_config';
 
 config();
 // const env = process.env.NODE_ENV;
