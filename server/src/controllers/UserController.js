@@ -1,4 +1,4 @@
-//import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import Users from "../models/users";
 import Authorization from "../middlewares/Authorization";
 
@@ -40,6 +40,46 @@ class UserController {
         }
     }
 
+/**
+* @static
+* @description this method takes in the params from the req.body then goes through
+* a middleware to validate the req.body then it generates a token taking in the user's id and type
+* granting a user access to the platform
+* @param {object} req - Request object
+* @param {object} res - Response object
+* @returns {object} a json body with the user's generated data
+* @memberof Controller
+*/
+    static async login(req, res) {
+        const { email, password } = req.body;
+        const { rows } = await Users.find(email);
+        if (!rows[0]) {
+            return res.status(401).json({
+                status: 401,
+                error: "Invalid credentials, inputed details does not match our records"
+            });
+        }
+        const isPasswordValid = await UserController.verifyPassword(
+            password,
+            rows[0].password
+        );
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                status: 401,
+                error: "Invalid credentials, inputed details does not match our record"
+            });
+        }
+        const token = Authorization.generateToken(
+            UserController.getTokenObj(rows[0])
+        );
+        return res.status(200).json({
+            status: 200,
+            data: {
+                token,
+                user: UserController.getUserobj(rows[0])
+            }
+        });
+    }
   
 
     /**
