@@ -8,11 +8,11 @@
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
     "build": "npm run clean && babel ./server -d ./server/dist",
     "clean": "rm -rf server/dist",
-    "test": "cross-env NODE_ENV=test mocha ./server/test/ --require babel-register --recursive --timeout 50000 --exit",
+      "test": "cross-env NODE_ENV=test  nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-register server/test/index.js --exit",
     "migration": "babel-node server/src/migrations/migrate.js",
     "drop:migration": "babel-node server/src/migrations/dropTable",
     "drop:create": "npm run drop:migration && npm run migration && npm run seed",
-    "seed": "babel-node server/src/migrations/seeders"
+    "seed": "babel-node server/src/seeders/index.js"
   },
   "repository": {
     "type": "git",

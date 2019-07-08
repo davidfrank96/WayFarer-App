@@ -115,9 +115,9 @@ class UserController {
         return {
           id: data.id,
           email: data.email,
-          first_name: data.firstname,
-          last_name: data.lastname,
-          isAdmin: data.isAdmin
+          first_name: data.first_name,
+          last_name: data.last_name,
+          is_admin: data.is_admin
         };
     }
 }
