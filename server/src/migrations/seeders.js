@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import pool from './index';
 //import hashPassword from '../helpers/hashPassword';
 
@@ -7,12 +6,15 @@ pool.on('connect', async () => {
   
 });
 
-const queryString = `
-    INSERT INTO users ("first_name", "last_name", email, password,  "is_admin") 
-    VALUES ('Frank', 'Frank', 'frank@gmail.com', 'password', true);
+const queryString = `INSERT INTO buses (
+                plate_number, manufacturer, model, year, capacity)
+                VALUES ('SMK584AZ', 'KIA', 'CERATO', '2010', 5);`
+
+               
         
     
-`;
+
+
 
 pool.query(queryString)
   .then((res) => {

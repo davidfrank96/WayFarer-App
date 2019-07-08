@@ -78,7 +78,7 @@ class Authorization {
             if (rows[0].is_admin === false) {
                 return res.status(403).json({
                     status: 403,
-                    error: "Forbidden access, Admin or Staff only"
+                    error: "Forbidden access, Admin only"
                 });
             }
             next();
