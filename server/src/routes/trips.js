@@ -10,17 +10,9 @@ const validation = [ValidationHandler.validate, Trim.trim,ValidationHandler.isEm
 
 tripRoutes.use(Authorization.authenticate);
 
-// tripRoutes.get(
-//   "/",
-//   Authorization.isAdmin,
-//   AccountController.getAllAccountDetails
-// );
-tripRoutes.post(
-  "/",
-     TripValidation.createTrip,
-    validation,
-     TripController.createTrip
-);
+tripRoutes.get("/",  TripController.getTrips);
+
+tripRoutes.post("/", Authorization.isAdmin, TripValidation.createTrip, validation, TripController.createTrip);
 
 
 // tripRoutes.patch(
