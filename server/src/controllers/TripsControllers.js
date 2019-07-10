@@ -3,7 +3,7 @@ import User from '../models/users';
 import Trip from '../models/trips';
 import validateParam from '../helpers/validateParam';
 import db from "../models/index";
-import tripQueries from "../models/tripQueries";
+import tripQueries from "../models/queries";
 // const Trip = require('../models/trip');
 
 

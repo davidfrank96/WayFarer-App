@@ -11,8 +11,8 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 bookingRoutes.use(Authorization.authenticate);
 
 
-bookingRoutes.post("/", BookingController.createBookings);
 
+bookingRoutes.delete("/:booking_id", BookingController.deleteBooking);
 
 
 
