@@ -89,7 +89,8 @@ class TripController {
   }
 
   static patchTrip(req, res) {
-
+    
+    validateParam(res, req.params.id);
     const { trip_id } = req.params;
 
     db.query(patchTripQuery, ['cancelled', trip_id])
