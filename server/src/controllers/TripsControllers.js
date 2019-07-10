@@ -3,12 +3,12 @@ import User from '../models/users';
 import Trip from '../models/trips';
 import validateParam from '../helpers/validateParam';
 import db from "../models/index";
-import tripQueries from "../models/trips";
+import tripQueries from "../models/tripQueries";
 // const Trip = require('../models/trip');
 
 
 
-const {createTripQuery, findBusQuery, getAllTripsQuery, cancelTripQuery, filterQuery,} = tripQueries;
+const { createTripQuery, findBusQuery, getAllTripsQuery, cancelTripQuery, filterQuery, patchTripQuery } = tripQueries;
 
 
 class TripController {
@@ -47,7 +47,7 @@ class TripController {
           });
         } else {
           db.query(createTripQuery, tripDetails)
-            .then(result2 => {
+            .then(response2 => {
               res.status(201).json({
                 status: 201,
                 data: "Trip  Successfully created"
@@ -62,7 +62,6 @@ class TripController {
   static getTrips(req, res) {
     db.query(getAllTripsQuery)
       .then(response => {
-      
         if (response.rows.length < 1) {
           res.status(204).json({
             status: 204,
@@ -76,7 +75,7 @@ class TripController {
             destination: item.destination,
             trip_date: item.trip_date,
             booking_status: item.booking_status,
-            fare: item.fare,
+            fare: parseFloat(item.fare),
             status: item.status
           }));
 
@@ -88,5 +87,31 @@ class TripController {
       })
       .catch(err => console.log(err));
   }
+
+  static patchTrip(req, res) {
+
+    const { trip_id } = req.params;
+
+    db.query(patchTripQuery, ['cancelled', trip_id])
+      .then((response) => {
+        const patchedTrip = response.rows[0];
+
+        console.log(trip_id);
+        if (!patchedTrip) {
+          res.status(404).json({
+            error: 'Trip neither found nor updated',
+          });
+          return;
+        }
+
+        res.status(200).json({
+          status: 200,
+          message: 'Trip cancelled successfully',
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+ 
 }
 export default TripController;
