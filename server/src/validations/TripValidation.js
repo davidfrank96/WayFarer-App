@@ -17,5 +17,14 @@ export default {
       .custom(value => notEmpty(value, "Type field cannot be left blank"))
       .isNumeric("must be an integer")
       .withMessage("Fare must be an Integer")
+  ],
+  patchTrip: [
+    check("status")
+      .trim()
+      .exists()
+      .withMessage("Status must be specified")
+      .custom(value => notEmpty(value, "Status field cannot be left blank"))
+      .isIn(["active", "cancelled"])
+      .withMessage("Status type does not exist")
   ]
 };

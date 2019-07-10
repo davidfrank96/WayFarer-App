@@ -15,13 +15,8 @@ tripRoutes.get("/",  TripController.getTrips);
 tripRoutes.post("/", Authorization.isAdmin, TripValidation.createTrip, validation, TripController.createTrip);
 
 
-// tripRoutes.patch(
-//   "/:id",
-//   Authorization.isAdmin,
-//   AccountValidation.updateAccount,
-//   validation,
-//   AccountController.update
-// );
-// accountRoutes.delete("/:id", Authorization.isAdmin, AccountController.delete);
+tripRoutes.patch('/:trip_id', Authorization.isAdmin, TripValidation.patchTrip, validation, TripController.patchTrip);
+
 
 export default tripRoutes;
+
