@@ -6,7 +6,7 @@ import validateParam from '../helpers/validateParam';
 import db from "../models/index";
 import bookingQueries from "../models/queries";
 
-const { getTripsQuery, checkBookingQuery, updateTripQuery, bookingQuery, deleteBookingQuery, } = bookingQueries;
+const { getTripsQuery, checkBookingQuery, updateTripQuery, bookingQuery, deleteBookingQuery, getBookingQuery} = bookingQueries;
 
 
 
@@ -15,9 +15,7 @@ class BookingController {
 
     static getBookings(req, res) {
         const {  user_id,  } = req.body;
-      
-        const getBookingQuery = 'SELECT * FROM bookings INNER JOIN users ON bookings.user_id = users.id';
-
+    
         db.query(getBookingQuery)
             .then((result) => {
                 if (result.rows.length < 1) {
@@ -51,6 +49,8 @@ class BookingController {
     }
 
     static deleteBooking(req, res) {
+ 
+        validateParam(res, req.params.id);
         const {  user_id,  } = req.body;
         const { booking_id } = req.params;
        
