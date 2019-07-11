@@ -1,0 +1,289 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0",
+        "title": "Way_Farer",
+        "description": " Way-Farer is a public bus transportation booking server"
+    },
+    "servers": [
+        {
+            "url": "https://frank-Way-Farer.herokuapp.com/api/v1"
+        },
+        {
+            "url": "http://localhost:9000/api/v1"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the app"
+        },
+        {
+            "name": "Trips",
+            "description": "API for Trips in the app"
+        }
+    ],
+    "paths": {
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Sign up a new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/users"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/responce"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Sign's in an existing user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/users"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/responce"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/trips": {
+            "post": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "creates trips",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+               "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "trip_id": {
+                                    "type": "integer"
+                                },
+                                "bus_id": {
+                                    "type": "integer"
+                                },
+                                "origin": {
+                                    "type": "string"
+                                },
+                                "destination": {
+                                    "type": "string"
+                                },
+                                "fare": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/trips"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/responce"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "trips"
+                ],
+                "summary": "Gets all Trips",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/trips"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/responce"
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            },
+                "patch": {
+                    "tags": [
+                        "Trips"
+                    ],
+                    "summary": "Updates the trip status",
+                    "security": [
+                        {
+                            "bearerAuth": []
+                        }
+                    ],
+                    "requestBody": {
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "parameters": [
+                        {
+                            "name": "Trip_id",
+                            "in": "path",
+                            "required": true,
+                            "description": "Trip_id",
+                            "schema": {
+                                "type": "integer",
+                                "minimum": 1
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/trips"
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/responce"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            
+        }
+            
+     
+    }
+}
