@@ -4,10 +4,11 @@
   "description": "WayFarer is a public bus transportation booking server. You are required to develop the",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./server/dist/src/app.js",
+    "start": "cross-env NODE_ENV=production node ./dist/src/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
     "build": "npm run clean && babel ./server -d ./server/dist",
     "clean": "rm -rf server/dist",
+    "heroku-postbuild": "npm run build",
     "test": "cross-env NODE_ENV=test  nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-register server/src/test/index.js --exit",
     "migration": "babel-node server/src/migrations/migrate.js",
     "drop:migration": "babel-node server/src/migrations/dropTable",
