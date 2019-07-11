@@ -13,6 +13,43 @@ const { getTripsQuery, checkBookingQuery, updateTripQuery, bookingQuery, deleteB
 
 class BookingController {
 
+    static getBookings(req, res) {
+        const {  user_id,  } = req.body;
+      
+        const getBookingQuery = 'SELECT * FROM bookings INNER JOIN users ON bookings.user_id = users.id';
+
+        db.query(getBookingQuery)
+            .then((result) => {
+                if (result.rows.length < 1) {
+                    res.status(404).json({
+                        status: 404,
+                        error: 'No bookings on record',
+                    });
+                    return;
+                }
+
+                const data = result.rows.map(item => (
+                    {
+                        booking_id: item.id,
+                        trip_id: item.trip_id,
+                        user_id: item.user_id,
+                        bus_id: item.bus_id,
+                        trip_date: item.created_on,
+                        seat_number: item.seat_number,
+                        first_name: item.first_name,
+                        last_name: item.last_name,
+                        email: item.email,
+                    }
+                ));
+
+                res.status(200).json({
+                    status: 200,
+                    data,
+                });
+            })
+            .catch(err => console.log(err));
+    }
+
     static deleteBooking(req, res) {
         const {  user_id,  } = req.body;
         const { booking_id } = req.params;
