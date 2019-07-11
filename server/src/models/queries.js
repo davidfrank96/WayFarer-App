@@ -10,4 +10,5 @@ export default {
     updateTripQuery: 'UPDATE trips SET booking_status = $1 WHERE id = $2 RETURNING *',
     bookingQuery: 'INSERT INTO bookings (user_id, trip_id, bus_id, trip_date, seat_number) VALUES ($1, $2, $3, $4, $5) RETURNING *',
     deleteBookingQuery: 'DELETE FROM bookings WHERE id = $1 RETURNING *',
+    getBookingQuery:'SELECT * FROM bookings INNER JOIN users ON bookings.user_id = users.id',
 };
