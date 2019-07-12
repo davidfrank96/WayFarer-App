@@ -50,7 +50,7 @@ class BookingController {
 
     static deleteBooking(req, res) {
  
-        validateParam(res, req.params.id);
+       // validateParam(res, req.params.id);
         const {  user_id,  } = req.body;
         const { booking_id } = req.params;
        

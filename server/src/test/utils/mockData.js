@@ -1,68 +1,58 @@
-import hashedPassword from '../../src/helpers/hashPassword';
+import hashedPassword from '../../helpers/hashpassword';
 
 export default {
-    signup: {
-        validClientDetails: {
-            first_name: "John",
-            last_name: "Doe",
-            email: "john@gmail.com",
-            password: hashedPassword("password", 10),
-            type: "Client",
-            isAdmin: false,
-            createdAt: new Date(),
-            modifiedAt: null
-        },
-        validStaffDetails: {
-            first_name: "Frank",
-            last_name: "Frank",
-            email: "frank@gmail.com",
-            password: hashedPassword("password", 10),
-            type: "Staff",
-            isAdmin: true,
-            createdAt: new Date(),
-            modifiedAt: null
-        },
-        invalidUserDetails: {
-            first_name: "Ashley",
-            password: hashedPassword("password", 10),
-            type: "emoji",
-            isAdmin: false,
-            createdAt: new Date(),
-            modifiedAt: null
-        }
+  signup: {
+    validClientDetails: {
+      first_name: "John",
+      last_name: "Doe",
+      email: "john@gmail.com",
+      password: hashedPassword("password", 10),
+      isAdmin: false,
+      createdAt: new Date(),
+      modifiedAt: null
     },
-    login: {
-        validLoginDetails: {
-            email: "frank@gmail.com",
-            password: "password"
-        },
-        emptyLoginDetails: {
-            email: "frank@gmail.com",
-            password: ""
-        },
-        invalidLoginDetails: {
-            email: "wrong@gmail.com",
-            password: "password"
-        }
+    validStaffDetails: {
+      first_name: "Frank",
+      last_name: "Frank",
+      email: "frank@gmail.com",
+      password: hashedPassword("password", 10),
+      isAdmin: true,
+      createdAt: new Date(),
+      modifiedAt: null
     },
-    account: {
-        validAccountDetails: {
-            type: "savings",
-            balance: 12000
-        },
-        emptyAccountDetails: {
-            balance: 10000
-        }
-    },
-    transaction: {
-        validTransaction: {
-            amount: 10000
-        },
-        emptyTransaction: {
-            amount: ""
-        },
-        excessTransaction: {
-            amount: 100000
-        }
+    invalidUserDetails: {
+      first_name: "Ashley",
+      password: hashedPassword("password", 10),
+      isAdmin: false,
+      createdAt: new Date(),
+      modifiedAt: null
     }
+  },
+  login: {
+    validLoginDetails: {
+      email: "frank@gmail.com",
+      password: "password"
+    },
+    emptyLoginDetails: {
+      email: "frank@gmail.com",
+      password: ""
+    },
+    invalidLoginDetails: {
+      email: "wrong@gmail.com",
+      password: "password"
+    }
+  },
+  Trip: {
+    validTripDetails: {
+      bus_id: "1",
+      trip_id: 1,
+      origin:"abuja",
+      destination: "lagos",
+      fare: 4000
+      
+    },
+    emptyTripDetails: {
+      fare: 1000
+    }
+  }
 };
