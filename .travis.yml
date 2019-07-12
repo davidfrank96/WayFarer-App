@@ -11,7 +11,7 @@ addons:
 
 env:
   global:
-    - CODECLIMATE_REPO_TOKEN=10f679124c72d07be9669b60bab2454ebe2168701f3a934f08e5b1e99255757f
+    - CODECLIMATE_REPO_TOKEN=1d83bed34d112e88bca8d0cad3eeaf288b32e7f79453656d43fcaae3de79ce0a
     - Travis_REPO_TOKEN=PaGRiWt19dxv2dOM-_iKWw
     - SECRET=esther96
 
