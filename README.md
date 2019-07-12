@@ -1,7 +1,7 @@
 # WayFarer-App
 WayFarer is a public bus transportation booking server. You are required to develop the back-end API.
 
-[![Coverage Status](https://coveralls.io/repos/github/davidfrank96/WayFarer-App/badge.svg?branch=develop)](https://coveralls.io/github/davidfrank96/WayFarer-App?branch=develop)[![Maintainability](https://api.codeclimate.com/v1/badges/7bafdc9abf56c6233570/maintainability)](https://codeclimate.com/github/davidfrank96/WayFarer-App/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/7bafdc9abf56c6233570/test_coverage)](https://codeclimate.com/github/davidfrank96/WayFarer-App/test_coverage)
+[![Coverage Status](https://coveralls.io/repos/github/davidfrank96/WayFarer-App/badge.svg?branch=develop)](https://coveralls.io/github/davidfrank96/WayFarer-App?branch=develop)[![Maintainability](https://api.codeclimate.com/v1/badges/7bafdc9abf56c6233570/maintainability)](https://codeclimate.com/github/davidfrank96/WayFarer-App/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/7bafdc9abf56c6233570/test_coverage)](https://codeclimate.com/github/davidfrank96/WayFarer-App/test_coverage)[![Build Status](https://travis-ci.com/davidfrank96/WayFarer-App.svg?branch=develop)](https://travis-ci.com/davidfrank96/WayFarer-App)
 
 ## Getting Started
 Clone the Repo.
