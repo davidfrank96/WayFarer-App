@@ -6,6 +6,8 @@ import bodyParser from "body-parser";
 import "babel-polyfill";
 import ErrorHandler from "./middlewares/ErrorHandler";
 import apiRoutes from "./routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerdoc from "./swagger.json";
 
 config();
 
@@ -15,26 +17,24 @@ const port = process.env.PORT || 9000;
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(
-    bodyParser.urlencoded({
-        extended: false
-    })
+  bodyParser.urlencoded({
+    extended: false
+  })
 );
 
 app.use("/api", apiRoutes);
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerdoc));
 app.use("*", (req, res) =>
-    res.status(404).json({
-        status: 404,
-        error: "Page Not Found"
-    })
+  res.status(404).json({
+    status: 404,
+    error: "Page Not Found"
+  })
 );
-
-
-
 
 app.use(ErrorHandler.sendError);
 
 app.listen(port, () => {
-    console.log(`Listening from port ${port}`);
+  console.log(`Listening from port ${port}`);
 });
 
 export default app;

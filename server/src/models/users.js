@@ -1,5 +1,5 @@
 
-import hashPassword from "../helpers/hashPassword";
+import hashPassword from "../helpers/hashpassword";
 import db from "./index";
 
 /**
