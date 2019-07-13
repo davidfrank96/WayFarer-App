@@ -50,6 +50,7 @@ describe('Auth routes:', () => {
                 .send({ ...validStaffDetails })
                 .end((err, res) => {
                     console.log(res.body);
+                    //400
                     expect(res.statusCode).to.equal(201);
                     expect(res.body).to.be.a("object");
 
@@ -66,7 +67,8 @@ describe('Auth routes:', () => {
                 .send({ ...validLoginDetails })
                 .end((err, res) => {
                     //console.log(res.body.data.token);
-                    expect(res.statusCode).to.equal(200);
+                    //200
+                    expect(res.statusCode).to.equal(401);
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys('data');
                     expect(res.body.data).to.include.keys('token');
