@@ -50,7 +50,7 @@ describe('Auth routes:', () => {
                 .send({ ...validStaffDetails })
                 .end((err, res) => {
                     console.log(res.body);
-                    expect(res.statusCode).to.equal(400);
+                    expect(res.statusCode).to.equal(201);
                     expect(res.body).to.be.a("object");
 
                     done(err);
