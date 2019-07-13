@@ -11,7 +11,7 @@ export default {
       createdAt: new Date(),
       modifiedAt: null
     },
-    validStaffDetails: {
+    validClientDetails: {
       first_name: "Frank",
       last_name: "Frank",
       email: "frank@gmail.com",

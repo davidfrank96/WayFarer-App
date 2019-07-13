@@ -47,7 +47,7 @@ describe('Auth routes:', () => {
             request(app)
                 .post("/api/v1/auth/signup")
                 .set("Accept", "application/json")
-                .send({ ...validStaffDetails })
+                .send({ ...validClientDetails })
                 .end((err, res) => {
                     console.log(res.body);
                     //400
