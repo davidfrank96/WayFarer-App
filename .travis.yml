@@ -23,7 +23,7 @@ before_script:
   - npm run migration
 
 script:
-  - npm testdev
+  - npm test
 
 after_success:
   - npm run coverage
