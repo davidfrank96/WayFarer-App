@@ -1,18 +1,18 @@
 const trip1 = `INSERT INTO trips (
                 bus_id, origin, destination, fare, status)
-                VALUES (1, 'IBADAN', 'LAGOS', 2000, 'cancelled');`;
+                VALUES (1, 'OGUN', 'ABUJA', 6000, 'cancelled');`;
 
 const trip2 = `INSERT INTO trips (
                 bus_id, origin, destination, fare)
-                VALUES (2, 'OSOGBO', 'LAGOS', 2000);`;
+                VALUES (2, 'CALABAR', 'LAGOS', 7000);`;
 
 const trip3 = `INSERT INTO trips (
                 bus_id, origin, destination, fare, status)
-                VALUES (3, 'IBADAN', 'BENIN', 2000, 'cancelled');`;
+                VALUES (3, 'AKWA IBOM', 'LAGOS', 6500, 'cancelled');`;
 
 const trip4 = `INSERT INTO trips (
                 bus_id, origin, destination, fare)
-                VALUES (4, 'IBADAN', 'ABUJA', 2000);`;
+                VALUES (4, 'ILORIN', 'ABUJA', 5500);`;
 
 const tripsQuery = `${trip1}${trip2}${trip3}${trip4}`;
 

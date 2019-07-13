@@ -6,14 +6,19 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./server/dist/src/app.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node -- ./server/src/app.js",
-    "build": "npm run clean && babel ./server -d ./server/dist",
+    "build": "npm run clean && babel ./server -d ./server/dist --copy-files",
     "clean": "rm -rf server/dist",
-    "test": " cross-env NODE_ENV=test npm run drop:create  && nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-register server/src/test/index.js --exit",
+    "heroku-postbuild": "npm run build",
+    "test": "cross-env NODE_ENV=test  nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-register server/src/test/index.js --exit",
     "testdev": " cross-env NODE_ENV=test npm run drop:create  && nyc --reporter=html --reporter=text mocha --timeout 50000 --exit --require babel-register server/src/test/index.js --exit",
     "migration": "babel-node server/src/migrations/migrate.js",
     "drop:migration": "babel-node server/src/migrations/dropTable",
     "drop:create": "npm run drop:migration && npm run migration && npm run seed",
-    "seed": "babel-node server/src/seeders/index.js"
+    "seed": "babel-node server/src/seeders/index.js",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info"
   },
   "repository": {
     "type": "git",
