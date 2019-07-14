@@ -35,7 +35,7 @@ export default {
   },
   Trip: {
     validTripDetails: {
-      bus_id: "4",
+      bus_id: "3",
       trip_id: 4,
       origin:"abuja",
       destination: "lagos",
