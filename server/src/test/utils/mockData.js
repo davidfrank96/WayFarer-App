@@ -28,16 +28,16 @@ export default {
       modifiedAt: null
     }
   },
-  login: {
-    validLoginDetails: {
+  Signin: {
+    validSigninDetails: {
       email: "frank@gmail.com",
       password: "password"
     },
-    emptyLoginDetails: {
+    emptySigninDetails: {
       email: "frank@gmail.com",
       password: ""
     },
-    invalidLoginDetails: {
+    invalidSigninDetails: {
       email: "wrong@gmail.com",
       password: "password"
     }
@@ -46,10 +46,9 @@ export default {
     validTripDetails: {
       bus_id: "1",
       trip_id: 1,
-      origin:"abuja",
+      origin: "abuja",
       destination: "lagos",
       fare: 4000
-      
     },
     emptyTripDetails: {
       fare: 1000

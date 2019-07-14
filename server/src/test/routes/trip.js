@@ -73,7 +73,7 @@ describe('Trip routes:', () => {
 
         it("should return all bookings", done => {
             request(app)
-                .get("/api/v1/booking")
+                .get("/api/v1/bookings")
                 .set("Accept", "application/json")
                 .set('Authorization', adminToken)
                 .end((err, res) => {
@@ -87,7 +87,7 @@ describe('Trip routes:', () => {
 
         it("should return unauthorized user", done => {
           request(app)
-            .get("/api/v1/booking")
+            .get("/api/v1/bookings")
             .set("Accept", "application/json")
               .end((err, res) => {
               expect(res.statusCode).to.equal(401);
@@ -147,7 +147,7 @@ describe('Trip routes:', () => {
 
         it('should return error for unauthorized user', (done) => {
             request(app)
-                .patch('/api/v1/booking/2')
+                .patch('/api/v1/bookings/2')
                 .set('Accept', 'application/json')
                 .send({ status: '' })
                 .end((err, res) => {
@@ -163,7 +163,7 @@ describe('Trip routes:', () => {
     describe('## Delete', () => {
         it('should delete an existing account', (done) => {
             request(app)
-                .delete('/api/v1/booking/2')
+                .delete('/api/v1/bookings/2')
                 .set('Accept', 'application/json')
                 .set('Authorization', adminToken)
                 .end((err, res) => {
@@ -178,7 +178,7 @@ describe('Trip routes:', () => {
 
         it('should return error for account not found', (done) => {
             request(app)
-                .delete('/api/v1/booking/9')
+                .delete('/api/v1/bookings/9')
                 .set('Accept', 'application/json')
                 .set('Authorization', userToken)
                 .end((err, res) => {
@@ -193,7 +193,7 @@ describe('Trip routes:', () => {
 
         it('should return error for unauthorized user', (done) => {
             request(app)
-                .delete('/api/v1/booking/2')
+                .delete('/api/v1/bookings/2')
                 .set('Accept', 'application/json')
                 .end((err, res) => {
                     expect(res.statusCode).to.equal(401);
