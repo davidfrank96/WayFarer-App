@@ -1,7 +1,7 @@
-import pool from './index';
+import pool from "./index";
 
-pool.on('connect', () => {
-    console.log('Connected to the database');
+pool.on("connect", () => {
+  console.log("Connected to the database");
 });
 
 const queryText = `CREATE TABLE IF NOT EXISTS users(
@@ -44,21 +44,19 @@ const queryText = `CREATE TABLE IF NOT EXISTS users(
         trip_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
         seat_number INT DEFAULT 1,
         created_on TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-        PRIMARY KEY(trip_id, user_id),
         FOREIGN KEY (trip_id) REFERENCES trips (id),
         FOREIGN KEY (user_id) REFERENCES users (id)
         );
     
 `;
 
-
 pool
-    .query(queryText)
-    .then(res => {
-        console.log(res);
-        pool.end();
-    })
-    .catch(err => {
-        console.log(err);
-        pool.end();
-    });
+  .query(queryText)
+  .then(res => {
+    console.log(res);
+    pool.end();
+  })
+  .catch(err => {
+    console.log(err);
+    pool.end();
+  });

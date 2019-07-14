@@ -33,6 +33,6 @@ apiRoutes.get("/v1", (req, res) =>
 apiRoutes.use("/v1/auth", userRoutes);
 apiRoutes.use("/v1/trips", tripRoutes);
 apiRoutes.use("/v1/booking", bookingRoutes);
-apiRoutes.use("/v1/admin",  UserValidation.signup,);
+apiRoutes.use("/v1/admin", UserValidation.signup);
 
 export default apiRoutes;
