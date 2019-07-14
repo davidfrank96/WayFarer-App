@@ -51,7 +51,7 @@ describe('Auth routes:', () => {
                 .end((err, res) => {
                     console.log(res.body);
                     //400
-                    expect(res.statusCode).to.equal(201);
+                    expect(res.statusCode).to.equal(400);
                     expect(res.body).to.be.a("object");
 
                     done(err);
@@ -68,11 +68,11 @@ describe('Auth routes:', () => {
                 .end((err, res) => {
                     //console.log(res.body.data.token);
                     //200
-                    expect(res.statusCode).to.equal(401);
+                    expect(res.statusCode).to.equal(200);
                     expect(res.body).to.be.a('object');
-                    // expect(res.body).to.include.keys('data');
-                    // expect(res.body.data).to.include.keys('token');
-                    // expect(res.body.data).to.include.keys('user');
+                    expect(res.body).to.include.keys('data');
+                    expect(res.body.data).to.include.keys('token');
+                    expect(res.body.data).to.include.keys('user');
 
                     done(err);
                 });

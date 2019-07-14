@@ -21,9 +21,9 @@ describe('Trip routes:', () => {
                 .end((err, res) => {
                     //201
                     console.log(res.body);
-                    expect(res.statusCode).to.equal(500);
+                    expect(res.statusCode).to.equal(201);
                     expect(res.body).to.be.a('object');
-                    // expect(res.body).to.include.keys('data');
+                    expect(res.body).to.include.keys('data');
                    
                     done(err);
                 });
@@ -37,9 +37,9 @@ describe('Trip routes:', () => {
                 .send({ ...emptyTripDetails })
                 .end((err, res) => {
                     //400
-                    expect(res.statusCode).to.equal(500);
+                    expect(res.statusCode).to.equal(400);
                     expect(res.body).to.be.a('object');
-                    // expect(res.body).to.include.keys('errors');
+                    expect(res.body).to.include.keys('errors');
 
                     done(err);
                 });
@@ -66,7 +66,7 @@ describe('Trip routes:', () => {
             .set('Authorization', adminToken)
               .end((err, res) => {
                 //200
-              expect(res.statusCode).to.equal(204);
+              expect(res.statusCode).to.equal(200);
               expect(res.body).to.be.a("object");
               
 
@@ -82,7 +82,7 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .end((err, res) => {
                     //200
-                    expect(res.statusCode).to.equal(500);
+                    expect(res.statusCode).to.equal(200);
                     expect(res.body).to.be.a("object");
 
 
@@ -114,9 +114,9 @@ describe('Trip routes:', () => {
                 .send({ status: 'cancelled' })
                 .end((err, res) => {
                     //200
-                    expect(res.statusCode).to.equal(500);
-                    // expect(res.body).to.include.keys('message');
-                    // expect(res.body.message).to.equal('Trip cancelled successfully');
+                    expect(res.statusCode).to.equal(200);
+                    expect(res.body).to.include.keys('message');
+                    expect(res.body.message).to.equal('Trip cancelled successfully');
 
                     done(err);
                 });
@@ -130,8 +130,8 @@ describe('Trip routes:', () => {
                 .send({ status: '' })
                 .end((err, res) => {
                     //400
-                    expect(res.statusCode).to.equal(500);
-                    // expect(res.body).to.include.keys('errors');
+                    expect(res.statusCode).to.equal(400);
+                    expect(res.body).to.include.keys('errors');
 
                     done(err);
                 });
@@ -145,9 +145,9 @@ describe('Trip routes:', () => {
                 .send({ status: 'cancelled' })
                 .end((err, res) => {
                     //200
-                    expect(res.statusCode).to.equal(500);
-                    // expect(res.body).to.include.keys('message');
-                    // expect(res.body.message).to.equal('Trip cancelled successfully');
+                    expect(res.statusCode).to.equal(200);
+                    expect(res.body).to.include.keys('message');
+                    expect(res.body.message).to.equal('Trip cancelled successfully');
 
                     done(err);
                 });
@@ -176,9 +176,9 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .end((err, res) => {
                     //200
-                    expect(res.statusCode).to.equal(404);
-                    // expect(res.body).to.include.keys('message');
-                    // expect(res.body.message).to.equal('Booking deleted successfully');
+                    expect(res.statusCode).to.equal(200);
+                    expect(res.body).to.include.keys('message');
+                    expect(res.body.message).to.equal('Booking deleted successfully');
 
                     done(err);
                 });
