@@ -3,15 +3,6 @@ import hashedPassword from '../../helpers/hashpassword';
 export default {
   signup: {
     validClientDetails: {
-      first_name: "John",
-      last_name: "Doe",
-      email: "john@gmail.com",
-      password: hashedPassword("password", 10),
-      isAdmin: false,
-      createdAt: new Date(),
-      modifiedAt: null
-    },
-    validStaffDetails: {
       first_name: "Frank",
       last_name: "Frank",
       email: "frank@gmail.com",
@@ -44,8 +35,8 @@ export default {
   },
   Trip: {
     validTripDetails: {
-      bus_id: "1",
-      trip_id: 1,
+      bus_id: "3",
+      trip_id: 4,
       origin:"abuja",
       destination: "lagos",
       fare: 4000

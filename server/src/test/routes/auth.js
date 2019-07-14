@@ -47,9 +47,10 @@ describe('Auth routes:', () => {
             request(app)
                 .post("/api/v1/auth/signup")
                 .set("Accept", "application/json")
-                .send({ ...validStaffDetails })
+                .send({ ...validClientDetails })
                 .end((err, res) => {
                     console.log(res.body);
+                    //400
                     expect(res.statusCode).to.equal(400);
                     expect(res.body).to.be.a("object");
 
@@ -66,6 +67,7 @@ describe('Auth routes:', () => {
                 .send({ ...validLoginDetails })
                 .end((err, res) => {
                     //console.log(res.body.data.token);
+                    //200
                     expect(res.statusCode).to.equal(200);
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys('data');

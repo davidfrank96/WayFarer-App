@@ -44,7 +44,6 @@ const queryText = `CREATE TABLE IF NOT EXISTS users(
         trip_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
         seat_number INT DEFAULT 1,
         created_on TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-        PRIMARY KEY(trip_id, user_id),
         FOREIGN KEY (trip_id) REFERENCES trips (id),
         FOREIGN KEY (user_id) REFERENCES users (id)
         );

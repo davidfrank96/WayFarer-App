@@ -19,6 +19,8 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .send({ ...validTripDetails })
                 .end((err, res) => {
+                    //201
+                    console.log(res.body);
                     expect(res.statusCode).to.equal(201);
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys('data');
@@ -34,6 +36,7 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .send({ ...emptyTripDetails })
                 .end((err, res) => {
+                    //400
                     expect(res.statusCode).to.equal(400);
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys('errors');
@@ -61,7 +64,8 @@ describe('Trip routes:', () => {
             .get("/api/v1/trips")
             .set("Accept", "application/json")
             .set('Authorization', adminToken)
-            .end((err, res) => {
+              .end((err, res) => {
+                //200
               expect(res.statusCode).to.equal(200);
               expect(res.body).to.be.a("object");
               
@@ -77,6 +81,7 @@ describe('Trip routes:', () => {
                 .set("Accept", "application/json")
                 .set('Authorization', adminToken)
                 .end((err, res) => {
+                    //200
                     expect(res.statusCode).to.equal(200);
                     expect(res.body).to.be.a("object");
 
@@ -108,6 +113,7 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .send({ status: 'cancelled' })
                 .end((err, res) => {
+                    //200
                     expect(res.statusCode).to.equal(200);
                     expect(res.body).to.include.keys('message');
                     expect(res.body.message).to.equal('Trip cancelled successfully');
@@ -123,6 +129,7 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .send({ status: '' })
                 .end((err, res) => {
+                    //400
                     expect(res.statusCode).to.equal(400);
                     expect(res.body).to.include.keys('errors');
 
@@ -137,6 +144,7 @@ describe('Trip routes:', () => {
                 .set('Authorization', adminToken)
                 .send({ status: 'cancelled' })
                 .end((err, res) => {
+                    //200
                     expect(res.statusCode).to.equal(200);
                     expect(res.body).to.include.keys('message');
                     expect(res.body.message).to.equal('Trip cancelled successfully');
@@ -167,6 +175,7 @@ describe('Trip routes:', () => {
                 .set('Accept', 'application/json')
                 .set('Authorization', adminToken)
                 .end((err, res) => {
+                    //200
                     expect(res.statusCode).to.equal(200);
                     expect(res.body).to.include.keys('message');
                     expect(res.body.message).to.equal('Booking deleted successfully');
