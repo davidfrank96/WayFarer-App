@@ -3,11 +3,11 @@ import hashedPassword from '../../helpers/hashpassword';
 export default {
   signup: {
     validClientDetails: {
-      first_name: "John",
-      last_name: "Doe",
-      email: "john@gmail.com",
+      first_name: "Frank",
+      last_name: "Frank",
+      email: "frank@gmail.com",
       password: hashedPassword("password", 10),
-      isAdmin: false,
+      isAdmin: true,
       createdAt: new Date(),
       modifiedAt: null
     },
