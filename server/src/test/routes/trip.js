@@ -20,6 +20,7 @@ describe('Trip routes:', () => {
                 .send({ ...validTripDetails })
                 .end((err, res) => {
                     //201
+                    console.log(res.body);
                     expect(res.statusCode).to.equal(500);
                     expect(res.body).to.be.a('object');
                     // expect(res.body).to.include.keys('data');

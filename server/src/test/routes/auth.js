@@ -16,6 +16,7 @@ describe('Auth routes:', () => {
                 .set('Accept', 'application/json')
                 .send({ ...validClientDetails })
                 .end((err, res) => {
+                    console.log(res.body);
                     expect(res.statusCode).to.equal(201);
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys('data');
