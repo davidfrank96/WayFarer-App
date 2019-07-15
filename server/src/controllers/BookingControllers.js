@@ -52,7 +52,8 @@ class BookingController {
                         .then((response3) => {
                             const tripUpdate = response3.rows[0];
 
-                            const moreBookingData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
+                            const moreBookingData = [foundTrip.id, tripUpdate.trip_date, tripUpdate.booking_status];
+                            //foundTrip.bus_id
                             const completeBookingData = [1, id, ...moreBookingData];
 
                             db.query(bookingQuery, completeBookingData)
