@@ -13,8 +13,8 @@ const updateData = [1, "id"];
 
 class BookingController {
       static createBookings(req, res) {
-    const { user_id, id, } = req.body;
-
+    const { id, } = req.body;
+          const { user_id } = req.user;
    
     db.query(getTripsQuery, [id])
         .then((response1) => {
@@ -28,25 +28,25 @@ class BookingController {
             //     return;
             // }
 
-            if (!foundTrip) {
-                res.status(404).json({
-                    status: 404,
-                    error: 'Trip is not available',
-                });
-                return;
-            }
+            // if (!foundTrip) {
+            //     res.status(404).json({
+            //         status: 404,
+            //         error: 'Trip is not available',
+            //     });
+            //     return;
+            // }
 
             db.query(checkBookingQuery, [user_id, id])
                 .then((response2) => {
                     const tripBooked = response2.rows[0];
                 
-                    if (tripBooked) {
-                        res.status(404).json({
-                            status: 404,
-                            error: 'You have been booked on this trip already',
-                        });
-                        return;
-                    }
+                    // if (tripBooked) {
+                    //     res.status(404).json({
+                    //         status: 404,
+                    //         error: 'You have been booked on this trip already',
+                    //     });
+                    //     return;
+                    // }
                 
                     db.query(updateTripQuery, [1, id])
                         .then((response3) => {
