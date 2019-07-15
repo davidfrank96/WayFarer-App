@@ -12,11 +12,11 @@ tripRoutes.use(Authorization.authenticate);
 
 tripRoutes.get("/",  TripController.getTrips);
 
-tripRoutes.post("/", Authorization.isAdmin, TripValidation.createTrip, validation, TripController.createTrip);
+tripRoutes.post("/",  TripController.createTrip);
+// Authorization.isAdmin, TripValidation.createTrip, validation,
 
-
-tripRoutes.patch('/:id', Authorization.isAdmin, TripValidation.patchTrip, validation, TripController.patchTrip);
-
+tripRoutes.patch('/:id',  TripController.patchTrip);
+// Authorization.isAdmin, TripValidation.patchTrip, validation,
 
 export default tripRoutes;
 

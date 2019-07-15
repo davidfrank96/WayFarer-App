@@ -20,13 +20,13 @@ class BookingController {
         .then((response1) => {
             const foundTrip = response1.rows[0]
 
-            if (foundTrip.status === 'cancelled') {
-                res.status(404).json({
-                    status: 404,
-                    error: 'Trip has been cancelled',
-                });
-                return;
-            }
+            // if (foundTrip.status === 'cancelled') {
+            //     res.status(404).json({
+            //         status: 404,
+            //         error: 'Trip has been cancelled',
+            //     });
+            //     return;
+            // }
 
             if (!foundTrip) {
                 res.status(404).json({
