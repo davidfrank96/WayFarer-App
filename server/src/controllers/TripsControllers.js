@@ -40,25 +40,19 @@ class TripController {
           eachBus => eachBus.status === "active"
         );
 
-        if (BusFound && BusActive.length) {
-          res.status(404).json({
-            status: 404,
-            error: "Bus with this ID is already assigned"
-          });
-        } else {
-          db.query(createTripQuery, tripDetails)
-            .then(response2 => {
-              res.status(201).json({
-                status: 201,
-                data: "Trip  Successfully created"
-              });
-            })
-            .catch(err => console.log(err));
-        }
+        db.query(createTripQuery, tripDetails)
+          .then(response2 => {
+            res.status(201).json({
+              status: 201,
+              data: response2.rows[0]
+            });
+          })
+          .catch(err => console.log(err));
+
       })
       .catch(err => console.log(err));
   }
-
+  
   static getTrips(req, res) {
     db.query(getAllTripsQuery)
       .then(response => {
