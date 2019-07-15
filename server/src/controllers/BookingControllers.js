@@ -13,7 +13,7 @@ const updateData = [1, "id"];
 
 class BookingController {
       static createBookings(req, res) {
-    const { id, } = req.body;
+    const { id,  } = req.body;
           const { user_id } = req.user;
    
     db.query(getTripsQuery, [id])
@@ -51,9 +51,11 @@ class BookingController {
                     db.query(updateTripQuery, [1, id])
                         .then((response3) => {
                             const tripUpdate = response3.rows[0];
+                            const bus_id = foundTrip;
 
-                            const moreBookingData = [foundTrip.id, tripUpdate.trip_date, tripUpdate.booking_status];
-                            //foundTrip.bus_id
+                            console.log(bus_id);
+                            const moreBookingData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
+                        
                             const completeBookingData = [1, id, ...moreBookingData];
 
                             db.query(bookingQuery, completeBookingData)
@@ -88,7 +90,7 @@ class BookingController {
 
 
     static getBookings(req, res) {
-        const {  user_id,  } = req.body;
+        const { user_id, } = req.user;
     
         db.query(getBookingQuery)
             .then((result) => {
