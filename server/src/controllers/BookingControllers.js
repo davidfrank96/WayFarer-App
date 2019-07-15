@@ -7,16 +7,16 @@ import db from "../models/index";
 import bookingQueries from "../models/queries";
 
 const { getTripsQuery, checkBookingQuery, updateTripQuery, bookingQuery, deleteBookingQuery, getBookingQuery } = bookingQueries;
-const updateData = [1, "trip_id"];
+const updateData = [1, "id"];
 
 
 
 class BookingController {
       static createBookings(req, res) {
-    const { user_id, trip_id, } = req.body;
+    const { user_id, id, } = req.body;
 
    
-    db.query(getTripsQuery, [trip_id])
+    db.query(getTripsQuery, [id])
         .then((response1) => {
             const foundTrip = response1.rows[0]
 
@@ -36,7 +36,7 @@ class BookingController {
                 return;
             }
 
-            db.query(checkBookingQuery, [user_id, trip_id])
+            db.query(checkBookingQuery, [user_id, id])
                 .then((response2) => {
                     const tripBooked = response2.rows[0];
                 
@@ -48,12 +48,12 @@ class BookingController {
                         return;
                     }
                 
-                    db.query(updateTripQuery, [1, trip_id])
+                    db.query(updateTripQuery, [1, id])
                         .then((response3) => {
                             const tripUpdate = response3.rows[0];
 
                             const moreBookingData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
-                            const completeBookingData = [1, trip_id, ...moreBookingData];
+                            const completeBookingData = [1, id, ...moreBookingData];
 
                             db.query(bookingQuery, completeBookingData)
                                 .then((response4) => {
@@ -61,7 +61,7 @@ class BookingController {
 
                                     const data = {
                                         booking_id: booking.id,
-                                        trip_id: booking.trip_id,
+                                        trip_id: booking.id,
                                         user_id: booking.user_id,
                                         bus_id: foundTrip.bus_id,
                                         trip_date: tripUpdate.trip_date,
@@ -102,7 +102,7 @@ class BookingController {
                 const data = result.rows.map(item => (
                     {
                         booking_id: item.id,
-                        trip_id: item.trip_id,
+                        trip_id: item.id,
                         user_id: item.user_id,
                         bus_id: item.bus_id,
                         trip_date: item.created_on,

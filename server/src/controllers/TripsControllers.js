@@ -69,7 +69,7 @@ class TripController {
           });
         } else {
           const trips = response.rows.map(item => ({
-            trip_id: item.id,
+            id: item.id,
             bus_id: item.bus_id,
             origin: item.origin,
             destination: item.destination,
@@ -91,13 +91,13 @@ class TripController {
   static patchTrip(req, res) {
     
    // validateParam(res, req.params.id);
-    const { trip_id } = req.params;
+    const { id } = req.params;
 
-    db.query(patchTripQuery, ['cancelled', trip_id])
+    db.query(patchTripQuery, ['cancelled', id])
       .then((response) => {
         const patchedTrip = response.rows[0];
 
-        console.log(trip_id);
+        console.log(id);
         if (!patchedTrip) {
           res.status(404).json({
             error: 'Trip neither found nor updated',
