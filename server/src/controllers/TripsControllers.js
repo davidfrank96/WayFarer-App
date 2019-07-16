@@ -101,7 +101,9 @@ class TripController {
 
         res.status(200).json({
           status: 200,
-          message: 'Trip cancelled successfully',
+          data: {
+            message: 'Trip cancelled successfully',
+          } 
         });
       })
       .catch(err => console.log(err));
