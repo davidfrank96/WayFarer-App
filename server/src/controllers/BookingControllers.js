@@ -13,10 +13,10 @@ const updateData = [1, "id"];
 
 class BookingController {
       static createBookings(req, res) {
-    const { id,  } = req.body;
+          const { id  } = req.body;
           const { user_id } = req.user;
    
-    db.query(getTripsQuery, [id])
+          db.query(getTripsQuery, [id])
         .then((response1) => {
             const foundTrip = response1.rows[0]
 
@@ -28,61 +28,60 @@ class BookingController {
             //     return;
             // }
 
-            if (!foundTrip) {
-                res.status(404).json({
-                    status: 404,
-                    error: 'Trip is not available',
-                });
-                return;
-            }
+            // if (!foundTrip) {
+            //     res.status(404).json({
+            //         status: 404,
+            //         error: 'Trip is not available',
+            //     });
+            //     return;
+            // }
 
             db.query(checkBookingQuery, [user_id, id])
-                .then((response2) => {
-                    const tripBooked = response2.rows[0];
-                
-                    // if (tripBooked) {
-                    //     res.status(404).json({
-                    //         status: 404,
-                    //         error: 'You have been booked on this trip already',
-                    //     });
-                    //     return;
-                    // }
-                
-                    db.query(updateTripQuery, [1, id])
-                        .then((response3) => {
-                            const tripUpdate = response3.rows[0];
-                            // const bus_id = foundTrip;
+              .then((response2) => {
+                const tripBooked = response2.rows[0];
 
-                            console.log(foundTrip);
-                            const bookData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
-                        
-                            const returnBookingData = [1, id, ...bookData];
+                // if (tripBooked) {
+                //     res.status(404).json({
+                //         status: 404,
+                //         error: 'You have been booked on this trip already',
+                //     });
+                //     return;
+                // }
 
-                            db.query(bookingQuery, returnBookingData)
-                                .then((response4) => {
-                                    const booking = response4.rows[0];
+                  db.query(updateTripQuery, [1, id])
+                  .then((response3) => {
+                    const tripUpdate = response3.rows[0];
+                    // const bus_id = foundTrip;
 
-                                    const data = {
-                                        booking_id: booking.id,
-                                        trip_id: booking.id,
-                                        user_id: booking.user_id,
-                                        bus_id: foundTrip.bus_id,
-                                        trip_date: tripUpdate.trip_date,
-                                        seat_number: tripUpdate.booking_status,
-                                        message: 'Your trip has been booked',
-                                    };
+                    console.log(foundTrip);
+                    const bookData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
 
-                                    res.status(200).json({
-                                        status: 200,
-                                        data,
-                                    });
-                                })
-                                .catch(err => console.log(err));
+                      const returnBookingData = [1, id, ...bookData];
 
-                        })
-                        .catch(err => console.log(err));
-                })
-                .catch(err => console.log(err));
+                    db.query(bookingQuery, returnBookingData)
+                      .then((response4) => {
+                        const booking = response4.rows[0];
+
+                        const data = {
+                          booking_id: booking.id,
+                          trip_id: booking.id,
+                          user_id: booking.user_id,
+                          bus_id: foundTrip.bus_id,
+                          trip_date: tripUpdate.trip_date,
+                          seat_number: tripUpdate.booking_status,
+                          message: "Your trip has been booked"
+                        };
+
+                        res.status(200).json({
+                          status: 200,
+                          data,
+                        });
+                      })
+                      .catch(err => console.log(err));
+                  })
+                  .catch(err => console.log(err));
+              })
+              .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
 }
@@ -94,13 +93,13 @@ class BookingController {
     
         db.query(getBookingQuery)
             .then((result) => {
-                if (result.rows.length < 1) {
-                    res.status(404).json({
-                        status: 404,
-                        error: 'No bookings on record',
-                    });
-                    return;
-                }
+                // if (result.rows.length < 1) {
+                //     res.status(404).json({
+                //         status: 404,
+                //         error: 'No bookings on record',
+                //     });
+                //     return;
+                // }
 
                 const data = result.rows.map(item => (
                     {
@@ -128,10 +127,10 @@ class BookingController {
  
        // validateParam(res, req.params.id);
         const {  user_id,  } = req.body;
-        const { booking_id } = req.params;
+        const {id } = req.params;
        
         
-        db.query(deleteBookingQuery, [booking_id])
+        db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];
             

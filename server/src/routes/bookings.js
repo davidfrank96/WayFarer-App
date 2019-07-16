@@ -16,7 +16,7 @@ bookingRoutes.use(Authorization.authenticate);
 
 bookingRoutes.get("/", Authorization.isAdmin, BookingController.getBookings);
 
-bookingRoutes.delete("/:booking_id", BookingController.deleteBooking);
+bookingRoutes.delete("/:id", BookingController.deleteBooking);
 
 bookingRoutes.post("/", BookingController.createBookings);
 
