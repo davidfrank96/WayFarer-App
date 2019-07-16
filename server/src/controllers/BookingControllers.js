@@ -133,7 +133,7 @@ class BookingController {
         db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];
-                console.log(result.rows[0]);
+            
                 if (data === undefined) {
                     res.status(404).json({
                         status: 404,
