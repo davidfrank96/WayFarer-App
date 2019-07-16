@@ -128,9 +128,9 @@ class BookingController {
 
         // validateParam(res, req.params.id);
         const { user_id, } = req.user;
-        const { booking_id } = req.params;
+        const { id } = req.params;
 
-        db.query(deleteBookingQuery, [booking_id])
+        db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];
             
