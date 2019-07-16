@@ -143,9 +143,9 @@ class BookingController {
                 }
                 res.status(200).json({
                     status: 200,
-                    data: {
-                        message: 'booking deleted successfully',
-                    } 
+                    
+                 message: 'booking deleted successfully',
+                    
                 });
             })
             .catch(err => console.log(err));
