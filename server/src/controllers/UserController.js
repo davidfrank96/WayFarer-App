@@ -53,7 +53,7 @@ class UserController {
     static async login(req, res) {
         const { email, password } = req.body;
         console.log(email, password);
-        if (!email || !password) return res.status(400).json({ error: "Invalid data" })
+        if (!email || !password) return res.status(400).json({ error: "Invalid data" });
        const { rows } = await Users.find(email);
 
         console.log(rows[0]);
@@ -68,12 +68,12 @@ class UserController {
             password,
             rows[0].password
         );
-        // if (!isPasswordValid) {
-        //     return res.status(401).json({
-        //         status: 401,
-        //         error: "Invalid credentials, inputed details does not match our record"
-        //     });
-        // }
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                status: 401,
+                error: "Invalid credentials, inputed details does not match our record"
+            });
+        }
         const token = Authorization.generateToken(
             UserController.getTokenObj(rows[0])
         );
