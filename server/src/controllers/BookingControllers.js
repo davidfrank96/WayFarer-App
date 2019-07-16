@@ -94,6 +94,7 @@ class BookingController {
     
         db.query(getBookingQuery)
             .then((result) => {
+                console.log(result);
                 if (result.rows.length < 1) {
                     res.status(404).json({
                         status: 404,
