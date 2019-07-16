@@ -59,16 +59,16 @@ class UserController {
         //         error: "Invalid credentials, inputed details does not match our records"
         //     });
         // }
-        // const isPasswordValid = await UserController.verifyPassword(
-        //     password,
-        //     rows[0].password
-        // );
-        // if (!isPasswordValid) {
-        //     return res.status(401).json({
-        //         status: 401,
-        //         error: "Invalid credentials, inputed details does not match our record"
-        //     });
-        // }
+        const isPasswordValid = await UserController.verifyPassword(
+            password,
+            rows[0].password
+        );
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                status: 401,
+                error: "Invalid credentials, inputed details does not match our record"
+            });
+        }
         const token = Authorization.generateToken(
             UserController.getTokenObj(rows[0])
         );
