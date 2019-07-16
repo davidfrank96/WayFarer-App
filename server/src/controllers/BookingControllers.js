@@ -64,8 +64,8 @@ class BookingController {
                         const booking = response4.rows[0];
 
                         const data = {
-                        
-                          trip_id: booking.id,
+                          booking_id: booking.id,
+                          trip_id: booking.trip_id,
                           user_id: booking.user_id,
                           bus_id: foundTrip.bus_id,
                           trip_date: tripUpdate.trip_date,
