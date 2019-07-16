@@ -51,14 +51,14 @@ class BookingController {
                     db.query(updateTripQuery, [1, id])
                         .then((response3) => {
                             const tripUpdate = response3.rows[0];
-                            const bus_id = foundTrip;
+                            // const bus_id = foundTrip;
 
-                            console.log(bus_id);
-                            const moreBookingData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
+                            console.log(foundTrip);
+                            const bookData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
                         
-                            const completeBookingData = [1, id, ...moreBookingData];
+                            const returnBookingData = [1, id, ...bookData];
 
-                            db.query(bookingQuery, completeBookingData)
+                            db.query(bookingQuery, returnBookingData)
                                 .then((response4) => {
                                     const booking = response4.rows[0];
 
