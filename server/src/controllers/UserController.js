@@ -53,6 +53,8 @@ class UserController {
     static async login(req, res) {
         const { email, password } = req.body;
         const { rows } = await Users.find(email);
+        
+        console.log(rows[0]);
         if (!rows[0]) {
             return res.status(401).json({ 
                 status: 401,
@@ -60,7 +62,6 @@ class UserController {
             });
 
         }
-        console.log(rows[0]);
         const isPasswordValid = await UserController.verifyPassword(
             password,
             rows[0].password
