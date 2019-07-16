@@ -7,16 +7,16 @@ import db from "../models/index";
 import bookingQueries from "../models/queries";
 
 const { getTripsQuery, checkBookingQuery, updateTripQuery, bookingQuery, deleteBookingQuery, getBookingQuery } = bookingQueries;
-const updateData = [1, "id"];
+const updateData = [1, "trip_id"];
 
 
 
 class BookingController {
       static createBookings(req, res) {
-          const { id  } = req.body;
+          const { trip_id  } = req.body;
           const { user_id } = req.user;
    
-          db.query(getTripsQuery, [id])
+          db.query(getTripsQuery, [trip_id])
         .then((response1) => {
             const foundTrip = response1.rows[0]
             
@@ -37,7 +37,7 @@ class BookingController {
                 return;
             }
 
-            db.query(checkBookingQuery, [user_id, id])
+            db.query(checkBookingQuery, [user_id, trip_id])
               .then((response2) => {
                 const tripBooked = response2.rows[0];
 
@@ -49,7 +49,7 @@ class BookingController {
                 //     return;
                 // }
 
-                  db.query(updateTripQuery, [1, id])
+                  db.query(updateTripQuery, [1, trip_id])
                   .then((response3) => {
                     const tripUpdate = response3.rows[0];
                     // const bus_id = foundTrip;
@@ -57,14 +57,14 @@ class BookingController {
                     console.log(foundTrip);
                     const bookData = [foundTrip.bus_id, tripUpdate.trip_date, tripUpdate.booking_status];
 
-                      const returnBookingData = [1, id, ...bookData];
+                      const returnBookingData = [1, trip_id, ...bookData];
 
                     db.query(bookingQuery, returnBookingData)
                       .then((response4) => {
                         const booking = response4.rows[0];
 
                         const data = {
-                          id: booking.id,
+                        
                           trip_id: booking.id,
                           user_id: booking.user_id,
                           bus_id: foundTrip.bus_id,
@@ -90,7 +90,7 @@ class BookingController {
 
 
     static getBookings(req, res) {
-        const { user_id } = req.body;
+        const { user_id } = req.user;
     
         db.query(getBookingQuery)
             .then((result) => {
@@ -127,10 +127,10 @@ class BookingController {
     static deleteBooking(req, res) {
 
         // validateParam(res, req.params.id);
-        const { user_id, } = req.body;
-        const { id } = req.params;
+        const { user_id, } = req.user;
+        const { booking_id } = req.params;
 
-        db.query(deleteBookingQuery, [id])
+        db.query(deleteBookingQuery, [booking_id])
             .then((result) => {
                 const data = result.rows[0];
             
