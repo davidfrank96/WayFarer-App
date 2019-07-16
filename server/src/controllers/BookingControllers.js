@@ -94,13 +94,13 @@ class BookingController {
     
         db.query(getBookingQuery)
             .then((result) => {
-                // if (result.rows.length < 1) {
-                //     res.status(404).json({
-                //         status: 404,
-                //         error: 'No bookings on record',
-                //     });
-                //     return;
-                // }
+                if (result.rows.length < 1) {
+                    res.status(404).json({
+                        status: 404,
+                        error: 'No bookings on record',
+                    });
+                    return;
+                }
 
                 const data = result.rows.map(item => (
                     {
