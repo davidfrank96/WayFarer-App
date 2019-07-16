@@ -52,11 +52,12 @@ class UserController {
 */
     static async login(req, res) {
         const { email, password } = req.body;
-        const { rows } = await Users.find(email);
-        
+        console.log(email, password)
+       const { rows } = await Users.find(email);
+
         console.log(rows[0]);
         if (!rows[0]) {
-            return res.status(401).json({ 
+            return res.status(401).json({
                 status: 401,
                 error: "Invalid credentials, inputed details does not match our records"
             });

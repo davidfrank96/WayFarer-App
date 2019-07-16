@@ -64,7 +64,7 @@ class BookingController {
                         const booking = response4.rows[0];
 
                         const data = {
-                          booking_id: booking.id,
+                          id: booking.id,
                           trip_id: booking.id,
                           user_id: booking.user_id,
                           bus_id: foundTrip.bus_id,
@@ -90,7 +90,7 @@ class BookingController {
 
 
     static getBookings(req, res) {
-        const { user_id } = req.user;
+        const { user_id } = req.body;
     
         db.query(getBookingQuery)
             .then((result) => {
@@ -104,8 +104,8 @@ class BookingController {
 
                 const data = result.rows.map(item => (
                     {
-                        booking_id: item.id,
-                        trip_id: item.id,
+                        id: item.id,
+                        trip_id: item.trip_id,
                         user_id: item.user_id,
                         bus_id: item.bus_id,
                         trip_date: item.created_on,
@@ -125,16 +125,16 @@ class BookingController {
     }
 
     static deleteBooking(req, res) {
- 
-       // validateParam(res, req.params.id);
-        const {  user_id,  } = req.user;
-        const {id } = req.params;
-       
-        
+
+        // validateParam(res, req.params.id);
+        const { user_id, } = req.body;
+        const { id } = req.params;
+
+
         db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];
-            
+
                 if (data === undefined) {
                     res.status(404).json({
                         status: 404,
