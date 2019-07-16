@@ -19,6 +19,7 @@ class BookingController {
           db.query(getTripsQuery, [id])
         .then((response1) => {
             const foundTrip = response1.rows[0]
+            console.log(rows[0]);
 
             // if (foundTrip.status === 'cancelled') {
             //     res.status(404).json({
@@ -89,7 +90,7 @@ class BookingController {
 
 
     static getBookings(req, res) {
-        const { user_id, } = req.user;
+        const { user_id } = req.user;
     
         db.query(getBookingQuery)
             .then((result) => {
@@ -126,7 +127,7 @@ class BookingController {
     static deleteBooking(req, res) {
  
        // validateParam(res, req.params.id);
-        const {  user_id,  } = req.body;
+        const {  user_id,  } = req.user;
         const {id } = req.params;
        
         

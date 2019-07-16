@@ -42,12 +42,12 @@ class Authorization {
     static async authenticate(req, res, next) {
         try {
             const token = Authorization.getToken(req);
-            // if (!token) {
-            //     return res.status(401).json({
-            //         status: 401,
-            //         error: "Unauthorized user"
-            //     });
-            // }
+            if (!token) {
+                return res.status(401).json({
+                    status: 401,
+                    error: "Unauthorized user"
+                });
+            }
             const decoded = await jwt.verify(token, process.env.SECRET);
             const response = UserModel.find(decoded.user.id);
             if (!response) {
