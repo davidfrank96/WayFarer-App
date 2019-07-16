@@ -28,13 +28,13 @@ class BookingController {
             //     return;
             // }
 
-            // if (!foundTrip) {
-            //     res.status(404).json({
-            //         status: 404,
-            //         error: 'Trip is not available',
-            //     });
-            //     return;
-            // }
+            if (!foundTrip) {
+                res.status(404).json({
+                    status: 404,
+                    error: 'Trip is not available',
+                });
+                return;
+            }
 
             db.query(checkBookingQuery, [user_id, id])
               .then((response2) => {
