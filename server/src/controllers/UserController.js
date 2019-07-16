@@ -52,11 +52,11 @@ class UserController {
 */
     static async login(req, res) {
         const { email, password } = req.body;
-        
+        console.log(email, password);
         if (!email || !password) return res.status(400).json({ error: "Invalid data" })
        const { rows } = await Users.find(email);
 
-        
+        console.log(rows[0]);
         if (!rows[0]) {
             return res.status(401).json({
                 status: 401,

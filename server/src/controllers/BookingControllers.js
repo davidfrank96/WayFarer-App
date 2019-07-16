@@ -130,7 +130,7 @@ class BookingController {
         const { user_id, } = req.body;
         const { id } = req.params;
 
-
+        console.log(id);
         db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];

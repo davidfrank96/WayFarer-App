@@ -18,6 +18,6 @@ bookingRoutes.get("/", Authorization.isAdmin, BookingController.getBookings);
 
 bookingRoutes.delete("/:id", BookingController.deleteBooking);
 
-bookingRoutes.post("/", BookingController.createBookings);
+bookingRoutes.post("/", Authorization.isAdmin, BookingController.createBookings);
 
 export default bookingRoutes;
