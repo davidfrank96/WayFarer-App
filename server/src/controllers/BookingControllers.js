@@ -128,27 +128,26 @@ class BookingController {
 
         // validateParam(res, req.params.id);
         const { user_id, } = req.user;
-        const { id } = req.params;
+        const { booking_id } = req.params;
 
-        db.query(deleteBookingQuery, [id])
-            .then((result) => {
-                const data = result.rows[0];
-            
-                if (data === undefined) {
-                    res.status(404).json({
-                        status: 404,
-                        error: 'Booking neither found nor deleted',
-                    });
-                    return;
-                }
-                res.status(200).json({
-                    status: 200,
-                    
-                 message: 'booking deleted successfully',
-                    
-                });
-            })
-            .catch(err => console.log(err));
+        db.query(deleteBookingQuery, [booking_id])
+          .then(result => {
+            const data = result.rows[0];
+
+            if (data === undefined) {
+              res.status(404).json({
+                status: 404,
+                error: "Booking neither found nor deleted"
+              });
+              return;
+            }
+            res.status(200).json({
+              status: 200,
+
+              message: "booking deleted successfully"
+            });
+          })
+          .catch(err => console.log(err));
     }
          
 
