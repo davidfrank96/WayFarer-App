@@ -19,7 +19,7 @@ class BookingController {
           db.query(getTripsQuery, [id])
         .then((response1) => {
             const foundTrip = response1.rows[0]
-            console.log(rows[0]);
+            
 
             // if (foundTrip.status === 'cancelled') {
             //     res.status(404).json({
