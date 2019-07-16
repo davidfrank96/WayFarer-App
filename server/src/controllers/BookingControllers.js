@@ -94,7 +94,6 @@ class BookingController {
     
         db.query(getBookingQuery)
             .then((result) => {
-                console.log(result);
                 if (result.rows.length < 1) {
                     res.status(404).json({
                         status: 404,
@@ -131,7 +130,6 @@ class BookingController {
         const { user_id, } = req.body;
         const { id } = req.params;
 
-        console.log(id);
         db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];

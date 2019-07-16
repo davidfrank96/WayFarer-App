@@ -14,10 +14,10 @@ const validation = [
 
 bookingRoutes.use(Authorization.authenticate);
 
-bookingRoutes.get("/", Authorization.isAdmin, BookingController.getBookings);
+bookingRoutes.get("/",  BookingController.getBookings);
 
 bookingRoutes.delete("/:id", BookingController.deleteBooking);
 
-bookingRoutes.post("/", Authorization.isAdmin, BookingController.createBookings);
+bookingRoutes.post("/",  BookingController.createBookings);
 
 export default bookingRoutes;
