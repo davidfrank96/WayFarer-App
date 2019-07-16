@@ -14,6 +14,6 @@ const validation = [
 userRoutes.post("/signup",  UserController.signup);
 //UserValidation.signup, validation,
 
-userRoutes.post("/signin",  UserController.login);
+userRoutes.post("/signin", UserValidation.login,   UserController.login);
 // UserValidation.login, validation,
 export default userRoutes;
