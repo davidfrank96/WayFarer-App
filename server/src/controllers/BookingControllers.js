@@ -133,7 +133,7 @@ class BookingController {
         db.query(deleteBookingQuery, [id])
             .then((result) => {
                 const data = result.rows[0];
-
+                console.log(result.rows[0]);
                 if (data === undefined) {
                     res.status(404).json({
                         status: 404,
@@ -143,7 +143,9 @@ class BookingController {
                 }
                 res.status(200).json({
                     status: 200,
-                    message: 'Booking deleted successfully',
+                    data: {
+                        message: 'booking deleted successfully',
+                    } 
                 });
             })
             .catch(err => console.log(err));
