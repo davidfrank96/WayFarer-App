@@ -23,267 +23,377 @@
             "description": "API for Trips in the app"
         }
     ],
-    "paths": {
-        "/auth/signup": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Sign up a new user",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "first_name": {
-                                        "type": "string"
-                                    },
-                                    "last_name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/users"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/responce"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/auth/login": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Sign's in an existing user",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/users"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/responce"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/trips": {
-            "post": {
-                "tags": [
-                    "Trips"
-                ],
-                "summary": "creates trips",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-               "requestBody": {
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "authorization",
+            "in": "header"
+        }
+    },
+   "paths": {
+    "/auth/signup": {
+        "post": {
+            "tags": [
+                "Users"
+            ],
+            "summary": "Sign up a new user",
+            "requestBody": {
                 "required": true,
                 "content": {
                     "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "trip_id": {
-                                    "type": "integer"
-                                },
-                                "bus_id": {
-                                    "type": "integer"
-                                },
-                                "origin": {
+                                "first_name": {
                                     "type": "string"
                                 },
-                                "destination": {
+                                "last_name": {
                                     "type": "string"
                                 },
-                                "fare": {
-                                    "type": "integer"
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
                                 }
                             }
                         }
                     }
                 }
             },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/trips"
+            "responses": {
+                "201": {
+                    "description": "Created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/users"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/responce"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/auth/login": {
+        "post": {
+            "tags": [
+                "Users"
+            ],
+            "summary": "Sign's in an existing user",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
                                 }
                             }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/users"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/responce"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+        "/trips/{tripId}": {
+            "patch": {
+                "tags": [
+                    "Trip"
+                ],
+                "summary": "Cancels a trip",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tripId",
+                        "description": "This is the unique ID of the trip",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Trip cannot be cancelled"
+                    },
+                    "401": {
+                        "description": "Admin access only"
+                    },
+                    "404": {
+                        "description": "Trip does not exist"
+                    }
+                }
+            }
+        },
+        "/trips/": {
+            "get": {
+                "tags": [
+                    "Trip"
+                ],
+                "summary": "Gets all trips",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/trip"
+                        }
+                    },
+                    "404": {
+                        "description": "There are no trips"
+                    }
+                }
+            }
+        },
+        "/booking/": {
+            "post": {
+                "tags": [
+                    "Booking"
+                ],
+                "summary": "Books a trip",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "tripId",
+                        "description": "ID of a trip",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "seat",
+                        "description": "Seat number",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/booking"
                         }
                     },
                     "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/responce"
-                                }
-                            }
-                        }
+                        "description": "Failed"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "trips"
+                    "Booking"
                 ],
-                "summary": "Gets all Trips",
+                "summary": "retrieve all bookings",
                 "security": [
                     {
-                        "bearerAuth": []
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "BookingId",
+                        "description": "Unique ID of a booking",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/trips"
-                                }
-                            }
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/booking"
                         }
+                    },
+                    "404": {
+                        "description": "There are no bookings"
+                    }
+                }
+            }
+        },
+        "/booking/{bookingId}": {
+            "delete": {
+                "tags": [
+                    "Booking"
+                ],
+                "summary": "Cancel a booking",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "BookingId",
+                        "description": "Unique ID of a booking",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     },
                     "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/responce"
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            },
-                "patch": {
-                    "tags": [
-                        "Trips"
-                    ],
-                    "summary": "Updates the trip status",
-                    "security": [
-                        {
-                            "bearerAuth": []
-                        }
-                    ],
-                    "requestBody": {
-                        "required": true,
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "status": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "This booking cannot be deleted"
                     },
-                    "parameters": [
-                        {
-                            "name": "Trip_id",
-                            "in": "path",
-                            "required": true,
-                            "description": "Trip_id",
-                            "schema": {
-                                "type": "integer",
-                                "minimum": 1
-                            }
-                        }
-                    ],
-                    "responses": {
-                        "201": {
-                            "description": "Created",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "$ref": "#/components/schemas/trips"
-                                    }
-                                }
-                            }
-                        },
-                        "400": {
-                            "description": "Bad request",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "$ref": "#/components/schemas/responce"
-                                    }
-                                }
-                            }
-                        }
+                    "404": {
+                        "description": "Booking does not belong to user"
                     }
                 }
-            
+            }
         }
-            
-     
+    },
+    "definitions": {
+        "user": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "is_admin": {
+                    "type": "boolean"
+                },
+                "img": {
+                    "type": "string"
+                }
+            }
+        },
+        "trip": {
+            "type": "object",
+            "properties": {
+                "trip_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                },
+                "bus_id": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "trip_date": {
+                    "type": "string"
+                },
+                "trip_time": {
+                    "type": "string"
+                },
+                "fare": {
+                    "type": "integer"
+                }
+            }
+        },
+        "booking": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "string"
+                },
+                "trip_id": {
+                    "type": "string"
+                },
+                "booking_id": {
+                    "type": "string"
+                },
+                "seat_number": {
+                    "type": "integer"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        }
     }
 }
